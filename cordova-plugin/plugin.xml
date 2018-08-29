@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="sensor-data-plugin" version="0.0.1">
+  <name>SensorDataPlugin</name>
+  <description>Sensor Data Plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>sensor, data, plugin</keywords>
+  <repo>git+ssh://git@gitlab.nrm.local:fiw/stair/app/sensor-data-plugin.git</repo>
+
+  <engines>
+    <engine name="cordova" version=">=8.0.0" />
+  </engines>
+
+  <js-module src="index.js" name="SensorDataPlugin">
+    <clobbers target="SensorDataPlugin" />
+    <clobbers target="cordova.plugins.SensorDataPlugin" />
+  </js-module>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="SensorDataPlugin" >
+        <param name="android-package" value="de.newroommedia.stairtalk.SensorDataPlugin"/>
+      </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <service
+        android:name=".ForegroundService"
+        android:exported="false"/>
+    </config-file>
+        
+    <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="merge">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </edit-config>
+
+    <source-file src="src/android/SensorDataPlugin.java" target-dir="src/cordova/plugin" />
+    <source-file src="src/android/ForegroundService.java" target-dir="src/cordova/plugin" />
+  </platform>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="SensorDataPlugin">
+        <param name="ios-package" value="CPSensorDataPlugin" />
+      </feature>
+    </config-file>
+    <source-file src="src/ios/CPSensorDataPlugin.swift" />
+  </platform>
+
+</plugin>
