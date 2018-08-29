@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.nrm.local:fiw/stair/app/sensor-data-plugin.git"
+    "url": "git+https://github.com/edbourbon/cordova-sensor-data-plugin.git"
   },
   "keywords": [
     "sensor",
